@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+
+    <!-- CSS for styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        #mainBox {
+            background-color: white;
+            width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        td input, td select, td textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        td input[type="radio"], td input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        #buttonDiv {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #buttonDiv button {
+            padding: 10px 15px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #buttonDiv button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+
+    <!-- JavaScript for form validation -->
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var password = document.getElementById("password").value;
+            var sex = document.querySelector('input[name="sex"]:checked');
+            var city = document.getElementById("city").value;
+            var intro = document.getElementById("introduction").value;
+
+            // Clear any previous error messages
+            var errorMessages = document.querySelectorAll('.error');
+            errorMessages.forEach(function(message) {
+                message.remove();
+            });
+
+            // Validation logic
+            var isValid = true;
+
+            if (name === "") {
+                var nameError = document.createElement('div');
+                nameError.classList.add('error');
+                nameError.textContent = "Name is required.";
+                document.getElementById("name").parentElement.appendChild(nameError);
+                isValid = false;
+            }
+
+            if (password === "") {
+                var passwordError = document.createElement('div');
+                passwordError.classList.add('error');
+                passwordError.textContent = "Password is required.";
+                document.getElementById("password").parentElement.appendChild(passwordError);
+                isValid = false;
+            }
+
+            if (!sex) {
+                var sexError = document.createElement('div');
+                sexError.classList.add('error');
+                sexError.textContent = "Please select your gender.";
+                document.getElementById("mainBox").appendChild(sexError);
+                isValid = false;
+            }
+
+            if (city === "") {
+                var cityError = document.createElement('div');
+                cityError.classList.add('error');
+                cityError.textContent = "Please choose your city.";
+                document.getElementById("city").parentElement.appendChild(cityError);
+                isValid = false;
+            }
+
+            if (intro === "") {
+                var introError = document.createElement('div');
+                introError.classList.add('error');
+                introError.textContent = "Introduction is required.";
+                document.getElementById("introduction").parentElement.appendChild(introError);
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+</head>
+<body>
+
+<div id="mainBox">
+
+    <h1>User Registration</h1>
+
+    <form onsubmit="return validateForm()">
+        <table>
+            <tr>
+                <td style="text-align: end;">Name:</td>
+                <td>
+                    <input type="text" id="name" style="width: 200px;">
+                </td>
+            </tr>
+
+            <tr>
+                <td style="text-align: end;">Password:</td>
+                <td>
+                    <input type="password" id="password" style="width: 200px;">
+                </td>
+            </tr>
+
+            <tr>
+                <td style="text-align: end;">Sex:</td>
+                <td>
+                    <input type="radio" value="male" name="sex"> Male
+                    <input type="radio" value="female" name="sex"> Female
+                </td>
+            </tr>
+
+            <tr>
+                <td style="text-align: end;">Hobby:</td>
+                <td>
+                    <input type="checkbox" name="Hobby"> Swimming<br>
+                    <input type="checkbox" name="Hobby"> Singing<br>
+                    <input type="checkbox" name="Hobby"> Dancing<br>
+                    <input type="checkbox" name="Hobby"> Running
+                </td>
+            </tr>
+
+            <tr>
+                <td style="text-align: end;">City:</td>
+                <td>
+                    <select name="city" id="city">
+                        <option value="">--choose your city--</option>
+                        <option value="shanghai">Shanghai</option>
+                        <option value="chengdu">Chengdu</option>
+                        <option value="beijing">Beijing</option>
+                        <option value="guangzhou">Guangzhou</option>
+                        <option value="other">Other</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="text-align: end;">Introduction:</td>
+                <td>
+                    <textarea id="introduction" rows="4" cols="25"></textarea>
+                </td>
+            </tr>
+        </table>
+
+        <div id="buttonDiv">
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </div>
+    </form>
+
+</div>
+
+</body>
+</html>
